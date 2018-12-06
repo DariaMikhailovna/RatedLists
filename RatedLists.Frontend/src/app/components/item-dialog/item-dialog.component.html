@@ -1,0 +1,14 @@
+<h2 mat-dialog-title *ngIf="!data.isBulkAdd">Add Item</h2>
+<h2 mat-dialog-title *ngIf="data.isBulkAdd">Add Items</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-form-field class="example-full-width" *ngIf="!data.isBulkAdd">
+    <input matInput [(ngModel)]='name' placeholder="Enter name">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" *ngIf="data.isBulkAdd">
+    <textarea matInput placeholder="Enter names"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="add()">Add</button>
+</mat-dialog-actions>

@@ -1,0 +1,48 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/RatedLists.Frontend/dist
+/RatedLists.Frontend/tmp
+/RatedLists.Frontend/out-tsc
+
+# dependencies
+/RatedLists.Frontend/node_modules
+
+# IDEs and editors
+/RatedLists.Frontend/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/RatedLists.Frontend/.sass-cache
+/RatedLists.Frontend/connect.lock
+/RatedLists.Frontend/coverage
+/RatedLists.Frontend/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/RatedLists.Frontend/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.vs
+
+/RatedLists.Backend/RatedLists.Backend/bin/
+/RatedLists.Backend/RatedLists.Backend/obj/
+
+*.spec.*
+
+/db/

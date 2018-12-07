@@ -6,22 +6,26 @@
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
 
-      <ng-container matColumnDef="name" width="500">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header width="500"> Name </th>
-        <td mat-cell *matCellDef="let element">
-          <a class="col-md-4" *ngIf="!element.isChangeName">{{element.item.name}}</a>
-          <mat-form-field *ngIf="element.isChangeName">
-            <input matInput placeholder="Change name" [(ngModel)]='element.item.name' (keyup.enter)="element.isChangeName = false">
-          </mat-form-field>
-          <a *ngIf="!element.isChangeName" class="col-md-4" href="javascript:void(0)" (click)="element.isChangeName = true">
-            <mat-icon color="accent">edit</mat-icon></a>
-        </td>
-      </ng-container>
-
       <ng-container matColumnDef="picture">
         <th mat-header-cell *matHeaderCellDef width="500"> Picture </th>
         <td mat-cell *matCellDef="let element"> <img src="{{element.item.picture}}" width="50" height="50">
           <a href="javascript:void(0)"  (click)="element.isChangePicture = true"><mat-icon color="accent">edit</mat-icon></a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header width="500"> Name </th>
+        <td mat-cell *matCellDef="let element">
+          <a href="#" class="col-md-4" *ngIf="!element.isChangeName"><strong>{{element.item.name}}</strong></a>
+          <mat-form-field *ngIf="element.isChangeName">
+            <input matInput placeholder="Change name" [(ngModel)]='element.item.name' (keyup.enter)="element.isChangeName = false">
+          </mat-form-field>
+          <a *ngIf="!element.isChangeName" class="col-md-4" href="javascript:void(0)" (click)="element.isChangeName = true">
+            <mat-icon color="accent">edit</mat-icon>
+          </a>
+          <a *ngIf="!element.isChangeName" class="col-md-4" href="javascript:void(0)" (click)="openCompareDialog(element.item.name)">
+            <mat-icon color="accent">compare_arrows</mat-icon>
+          </a>
         </td>
       </ng-container>
 
@@ -32,8 +36,9 @@
           <mat-form-field *ngIf="element.isChangeGrade">
             <input matInput placeholder="Change grade" type="number" [(ngModel)]='element.item.grade' (keyup.enter)="element.isChangeGrade = false">
           </mat-form-field>
-          <a *ngIf="!element.isChangeGrade" href="javascript:void(0)" (click)="element.isChangeGrade = true">
-            <mat-icon color="accent">edit</mat-icon></a>
+          <!--<a *ngIf="!element.isChangeGrade" href="javascript:void(0)" (click)="element.isChangeGrade = true">-->
+            <!--<mat-icon color="accent">edit</mat-icon>-->
+          <!--</a>-->
         </td>
       </ng-container>
 
@@ -44,14 +49,15 @@
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons sticky ="true"></mat-paginator>
   </div><br>
   <mat-button-toggle-group>
     <mat-button-toggle value="bold" (click)="openAddDialog(false)">Add</mat-button-toggle>
     <mat-button-toggle value="italic" (click)="openAddDialog(true)">Bulk Add</mat-button-toggle>
+    <mat-button-toggle value="italic" (click)="openCompareDialog('')">Compare</mat-button-toggle>
   </mat-button-toggle-group>
 </div>
 

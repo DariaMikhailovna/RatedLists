@@ -28,7 +28,7 @@ import {
   MatDatepickerModule,
   MatExpansionModule,
   MatCheckboxModule,
-  MatButtonToggleModule
+  MatButtonToggleModule, MatSliderModule
 } from '@angular/material';
 import {AuthDialogComponent} from './components/auth-dialog/auth-dialog.component';
 import {FormBuilder, FormsModule} from '@angular/forms';
@@ -38,6 +38,7 @@ import {MatSnackBarModule} from '@angular/material';
 import {MatPaginatorModule} from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material';
 import { DeleteElementDialogComponent } from './components/delete-element-dialog/delete-element-dialog.component';
+import { CompareDialogComponent } from './components/compare-dialog/compare-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { DeleteElementDialogComponent } from './components/delete-element-dialog
     ListOfItemsComponent,
     ItemDialogComponent,
     AuthDialogComponent,
-    DeleteElementDialogComponent
+    DeleteElementDialogComponent,
+    CompareDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { DeleteElementDialogComponent } from './components/delete-element-dialog
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSliderModule
   ],
   exports: [
     MatExpansionModule,
@@ -106,12 +109,14 @@ import { DeleteElementDialogComponent } from './components/delete-element-dialog
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSliderModule
   ],
   entryComponents: [
     AuthDialogComponent,
     ItemDialogComponent,
-    DeleteElementDialogComponent
+    DeleteElementDialogComponent,
+    CompareDialogComponent
   ],
   providers: [
     MainService,

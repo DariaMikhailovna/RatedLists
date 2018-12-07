@@ -5,6 +5,8 @@ import {MatPaginator} from '@angular/material//paginator';
 import {ItemDialogComponent} from '../item-dialog/item-dialog.component';
 import {DialogAnyData} from '../../models/dialogAnyData';
 import {DeleteElementDialogComponent} from '../delete-element-dialog/delete-element-dialog.component';
+import {MainService} from '../../services/main.service';
+import {CompareDialogComponent} from '../compare-dialog/compare-dialog.component';
 
 @Component({
   selector: 'app-list-of-items',
@@ -12,28 +14,52 @@ import {DeleteElementDialogComponent} from '../delete-element-dialog/delete-elem
   styleUrls: ['./list-of-items.component.css']
 })
 export class ListOfItemsComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'picture', 'grade', 'delete'];
+  displayedColumns: string[] = ['picture', 'name', 'grade', 'delete'];
   dataSource =  new MatTableDataSource<ItemViewModel>(ITEMS.map(x => {
     const ivm = new ItemViewModel(this.dialog);
     ivm.item = x;
     return ivm;
   }));
-
-  constructor(public dialog: MatDialog) { }
+  s: string;
+  constructor(public dialog: MatDialog, private mainService: MainService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
+    // this.getItems();
     ItemDialogComponent.onAddItem.subscribe(x => {
       const ivm = new ItemViewModel(this.dialog);
       ivm.item = new Item();
       ivm.item.name = x;
       this.dataSource.data.push(ivm);
-      console.log(this.dataSource.data);
     });
     this.dataSource.paginator = this.paginator;
   }
+
+  openCompareDialog(name: string) {
+    const data = new DialogAnyData();
+    if (name !== '') {
+      data.firstItem = name;
+    }
+    data.itemNames = this.dataSource.data.map(x => x.item.name);
+    const dialogRef = this.dialog.open(CompareDialogComponent, {
+      width: '400px',
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  getItems() {
+    this.mainService
+      .getString()
+      .subscribe(x => {
+        this.s = x;
+        console.log(x);
+      });
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data.item.name.toLowerCase().includes(filter) || data.item.grade.toString().toLowerCase().includes(filter);

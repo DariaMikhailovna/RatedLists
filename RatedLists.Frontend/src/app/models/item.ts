@@ -1,4 +1,5 @@
 export class Item {
+  id: string;
   name: string;
   picture: string;
   grade = 0;

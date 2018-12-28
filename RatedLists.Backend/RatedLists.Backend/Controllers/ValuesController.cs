@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RatedLists.Backend.Models;
 
 namespace RatedLists.Backend.Controllers
 {
@@ -10,6 +11,8 @@ namespace RatedLists.Backend.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private RatedListsContext context = new RatedListsContext();
+
         // GET api/values
         [HttpGet]
         public JsonResult Get()
@@ -26,8 +29,11 @@ namespace RatedLists.Backend.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        //[Route("api/values/AddItem")]
+        public IActionResult AddItem(Object item)
         {
+            context.AddItem((Item)item);
+            return Ok();
         }
 
         // PUT api/values/5

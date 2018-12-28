@@ -26,24 +26,30 @@ namespace RatedLists.Backend.Models
             gridFS = new GridFSBucket(database);
         }
 
-        private IMongoCollection<Item> GetAllItems
+        public IMongoCollection<Item> GetAllItems
         {
             get { return database.GetCollection<Item>("Items"); }
         }
 
-        private IMongoCollection<ListOfItems> GetAllListOfItems
+        public IMongoCollection<ListOfItems> GetAllListOfItems
         {
             get { return database.GetCollection<ListOfItems>("ListsOfItems"); }
         }
 
-        private IMongoCollection<User> GetAllUsers
+        public IMongoCollection<User> GetAllUsers
         {
             get { return database.GetCollection<User>("Users"); }
         }
 
-        private IMongoCollection<Comparison> GetAllComparisons 
+        public IMongoCollection<Comparison> GetAllComparisons 
         {
             get { return database.GetCollection<Comparison>("Comparisons"); }
+        }
+
+        public string AddItem(Item item)
+        {
+            database.GetCollection<Item>("Items").InsertOne(item);
+            return "OK";
         }
     }
 }

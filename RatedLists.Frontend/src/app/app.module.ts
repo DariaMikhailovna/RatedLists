@@ -39,6 +39,14 @@ import {MatPaginatorModule} from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material';
 import { DeleteElementDialogComponent } from './components/delete-element-dialog/delete-element-dialog.component';
 import { CompareDialogComponent } from './components/compare-dialog/compare-dialog.component';
+import { AppRoutingModule } from './app-routing.module';
+import {RouterModule, Routes} from '@angular/router';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/listOfLists', pathMatch: 'full' },
+  { path: 'listOfItems', component: ListOfItemsComponent },
+  { path: 'listOfLists', component: ListOfListsComponent }
+];
 
 @NgModule({
   declarations: [
@@ -55,6 +63,7 @@ import { CompareDialogComponent } from './components/compare-dialog/compare-dial
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
     MatExpansionModule,
     MatToolbarModule,
     MatDatepickerModule,
@@ -81,7 +90,8 @@ import { CompareDialogComponent } from './components/compare-dialog/compare-dial
     MatPaginatorModule,
     MatSortModule,
     MatSlideToggleModule,
-    MatSliderModule
+    MatSliderModule,
+    AppRoutingModule
   ],
   exports: [
     MatExpansionModule,

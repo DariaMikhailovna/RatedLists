@@ -32,7 +32,11 @@ export class ListOfItemsComponent implements OnInit {
       const ivm = new ItemViewModel(this.dialog);
       ivm.item = new Item();
       ivm.item.name = x;
+      ivm.item.listId = this.dataSource.data[0].item.listId; // TODO позже исправить
       this.dataSource.data.push(ivm);
+      this.mainService
+        .addItem(ivm.item)
+        .subscribe(data => console.log(data));
     });
     this.dataSource.paginator = this.paginator;
   }

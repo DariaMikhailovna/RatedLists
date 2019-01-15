@@ -18,7 +18,7 @@
         <td mat-cell *matCellDef="let element">
           <a href="#" class="col-md-4" *ngIf="!element.isChangeName"><strong>{{element.item.name}}</strong></a>
           <mat-form-field *ngIf="element.isChangeName">
-            <input matInput placeholder="Change name" [(ngModel)]='element.item.name' (keyup.enter)="element.isChangeName = false">
+            <input matInput placeholder="Change name" [(ngModel)]='element.item.name' (keyup.enter)="element.changeName()">
           </mat-form-field>
           <a *ngIf="!element.isChangeName" class="col-md-4" href="javascript:void(0)" (click)="element.isChangeName = true">
             <mat-icon color="accent">edit</mat-icon>
@@ -43,7 +43,7 @@
       </ng-container>
 
       <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef width="100"> Delete </th>
+        <th mat-header-cell *matHeaderCellDef width="500"> Delete </th>
         <td mat-cell *matCellDef="let element">
           <a href="javascript:void(0)"  (click)="element.deleteItem()"><mat-icon color="accent">delete</mat-icon></a>
         </td>
@@ -52,7 +52,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons sticky ="true"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons sticky ="true"></mat-paginator>
   </div><br>
   <mat-button-toggle-group>
     <mat-button-toggle value="bold" (click)="openAddDialog(false)">Add</mat-button-toggle>

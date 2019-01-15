@@ -7,7 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ListOfListsComponent } from './components/list-of-lists/list-of-lists.component';
 import { ListOfItemsComponent } from './components/list-of-items/list-of-items.component';
 import { ItemDialogComponent } from './components/item-dialog/item-dialog.component';
-import {MainService} from './services/main.service';
+import {ItemsService} from './services/items.service';
 import {
   MatButtonModule,
   MatDialogModule,
@@ -41,10 +41,12 @@ import { DeleteElementDialogComponent } from './components/delete-element-dialog
 import { CompareDialogComponent } from './components/compare-dialog/compare-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import {RouterModule, Routes} from '@angular/router';
+import { ListOfComparisonsComponent } from './components/list-of-comparisons/list-of-comparisons.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/listOfLists', pathMatch: 'full' },
   { path: 'listOfItems', component: ListOfItemsComponent },
+  { path: 'ListOfComparisons', component: ListOfComparisonsComponent },
   { path: 'listOfLists', component: ListOfListsComponent }
 ];
 
@@ -57,7 +59,8 @@ const routes: Routes = [
     ItemDialogComponent,
     AuthDialogComponent,
     DeleteElementDialogComponent,
-    CompareDialogComponent
+    CompareDialogComponent,
+    ListOfComparisonsComponent
   ],
   imports: [
     BrowserModule,
@@ -129,7 +132,7 @@ const routes: Routes = [
     CompareDialogComponent
   ],
   providers: [
-    MainService,
+    ItemsService,
     MatExpansionPanelDescription,
     MatDatepicker,
     FormBuilder,

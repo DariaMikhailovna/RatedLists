@@ -30,18 +30,29 @@ export class ListOfItemsComponent implements OnInit {
       this.openSnackBar('Item deleted:', x);
     });
     ItemDialogComponent.onAddItem.subscribe(x => {
-      const ivm = new ItemViewModel(this.dialog, this.mainService);
-      ivm.item = new Item();
-      ivm.item.name = x;
-      ivm.item.listId = this.dataSource.data[0].item.listId; // TODO позже исправить
-      this.dataSource.data.push(ivm);
-      this.mainService
-        .addItem(ivm.item)
-        .subscribe(data => {
-          this.getItems();
-          this.openSnackBar('Item added:', x);
-        });
+      if (!x.isBulkAdd) {
+        this.addItem(x.name);
+      } else {
+        const names = x.name.split(/\r?\n/);
+        for (let i = 0; i < names.length; i++) {
+          this.addItem(names[i]);
+        }
+      }
     });
+  }
+
+  addItem(name: string) {
+    const ivm = new ItemViewModel(this.dialog, this.mainService);
+    ivm.item = new Item();
+    ivm.item.name = name;
+    ivm.item.listId = this.dataSource.data[0].item.listId; // TODO позже исправить
+    this.dataSource.data.push(ivm);
+    this.mainService
+      .addItem(ivm.item)
+      .subscribe(data => {
+        this.getItems();
+        this.openSnackBar('Item added:', name);
+      });
   }
 
   openSnackBar(message: string, action: string) {

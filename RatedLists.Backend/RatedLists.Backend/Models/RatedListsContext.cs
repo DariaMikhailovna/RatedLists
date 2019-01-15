@@ -35,16 +35,17 @@ namespace RatedLists.Backend.Models
                 .ToList();
         }
 
-        public IMongoCollection<ListOfItems> GetAllListOfItems => database.GetCollection<ListOfItems>("ListsOfItems");
+        public List<Comparison> GetAllComparisons()
+        {
+            return database
+                .GetCollection<Comparison>("Comparisons")
+                .AsQueryable<Comparison>()
+                .ToList();
+        }
 
-        public IMongoCollection<User> GetAllUsers => database.GetCollection<User>("Users");
-
-        public IMongoCollection<Comparison> GetAllComparisons => database.GetCollection<Comparison>("Comparisons");
-
-        public string AddItem(Item item)
+        public void AddItem(Item item)
         {
             database.GetCollection<Item>("Items").InsertOne(item);
-            return "OK";
         }
 
         public void DeleteItem(string id)
@@ -55,6 +56,21 @@ namespace RatedLists.Backend.Models
         public void UpdateItem(Item item)
         {
             database.GetCollection<Item>("Items").FindOneAndReplace(x => x.Id == item.Id, item);
+        }
+
+        public void AddComparison(Comparison сomparison)
+        {
+            database.GetCollection<Comparison>("Comparisons").InsertOne(сomparison);
+        }
+
+        public void UpdateComparison(Comparison сomparison)
+        {
+            database.GetCollection<Comparison>("Comparisons").FindOneAndReplace(x => x.Id == сomparison.Id, сomparison);
+        }
+
+        public void DeleteComparison(string id)
+        {
+            database.GetCollection<Comparison>("Comparisons").DeleteOne(x => x.Id == id);
         }
     }
 }

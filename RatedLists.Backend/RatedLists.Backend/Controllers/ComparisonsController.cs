@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RatedLists.Backend.Models;
 
@@ -9,34 +10,34 @@ namespace RatedLists.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ItemsController : ControllerBase
+    public class ComparisonsController : ControllerBase
     {
         public readonly RatedListsContext Context = new RatedListsContext();
 
-        [HttpGet] 
-        public List<Item> Get()
+        [HttpGet]
+        public List<Comparison> Get()
         {
-            return Context.GetAllItems();
+            return Context.GetAllComparisons();
         }
 
         [HttpPost]
-        public IActionResult AddItem([FromBody] Item item)
+        public IActionResult AddComparison([FromBody] Comparison сomparison) 
         {
-            Context.AddItem(item);
+            Context.AddComparison(сomparison);
             return Ok();
-        }
+        } 
 
         [HttpPut]
-        public IActionResult Put([FromBody] Item item)
+        public IActionResult Put([FromBody] Comparison сomparison)
         {
-            Context.UpdateItem(item);
+            Context.UpdateComparison(сomparison);
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteItem(string id)
+        public IActionResult DeleteComparison(string id) 
         {
-            Context.DeleteItem(id);
+            Context.DeleteComparison(id);
             return Ok();
         }
     }

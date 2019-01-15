@@ -5,5 +5,6 @@ export class DialogAnyData {
   name: string;
   id: string;
   itemNames: string[];
-  firstItem: string;
+  items: Item[];
+  firstItem: Item;
 }

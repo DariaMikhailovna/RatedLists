@@ -10,9 +10,9 @@ namespace RatedLists.Backend.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         
-        public Item Item1 { get; set; }
+        public string Item1 { get; set; }
 
-        public Item Item2 { get; set; }
+        public string Item2 { get; set; }
 
         public int ComparisonNum { get; set; }
     } 

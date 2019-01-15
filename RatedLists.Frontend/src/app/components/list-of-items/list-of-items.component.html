@@ -23,7 +23,7 @@
           <a *ngIf="!element.isChangeName" class="col-md-4" href="javascript:void(0)" (click)="element.isChangeName = true">
             <mat-icon color="accent">edit</mat-icon>
           </a>
-          <a *ngIf="!element.isChangeName" class="col-md-4" href="javascript:void(0)" (click)="openCompareDialog(element.item.name)">
+          <a *ngIf="!element.isChangeName" class="col-md-4" href="javascript:void(0)" (click)="openCompareDialog(element.item)">
             <mat-icon color="accent">compare_arrows</mat-icon>
           </a>
         </td>
@@ -57,7 +57,7 @@
   <mat-button-toggle-group>
     <mat-button-toggle value="bold" (click)="openAddDialog(false)">Add</mat-button-toggle>
     <mat-button-toggle value="italic" (click)="openAddDialog(true)">Bulk Add</mat-button-toggle>
-    <mat-button-toggle value="italic" (click)="openCompareDialog('')">Compare</mat-button-toggle>
+    <mat-button-toggle value="italic" (click)="openCompareDialog(null)">Compare</mat-button-toggle>
   </mat-button-toggle-group>
 </div>
 

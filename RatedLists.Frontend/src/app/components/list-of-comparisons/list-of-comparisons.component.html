@@ -1,3 +1,50 @@
-<p>
-  list-of-comparisons works!
-</p>
+<div class="container-fluid">
+  <br>
+  <mat-form-field class="example-full-width">
+    <input matInput (keyup)="applyFilter($event.target.value)" width="1500" placeholder="Filter">
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="First Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header width="500"> First Name </th>
+        <td mat-cell *matCellDef="let element">
+          <a href="#" class="col-md-4"><strong>{{element.comparison.item1}}</strong></a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Difference">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header width="500"> Difference </th>
+        <td mat-cell *matCellDef="let element">
+          <a *ngIf="!element.isChangeGrade">{{element.comparison.comparisonNum}}</a>
+          <!--<mat-form-field *ngIf="element.isChangeGrade">-->
+            <!--<input matInput placeholder="Change grade" type="number" [(ngModel)]='element.item.grade' (keyup.enter)="element.isChangeGrade = false">-->
+          <!--</mat-form-field>-->
+          <!--<a *ngIf="!element.isChangeGrade" href="javascript:void(0)" (click)="element.isChangeGrade = true">-->
+          <!--<mat-icon color="accent">edit</mat-icon>-->
+          <!--</a>-->
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Second Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header width="500"> Second Name </th>
+        <td mat-cell *matCellDef="let element">
+          <a href="#" class="col-md-4"><strong>{{element.comparison.item2}}</strong></a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Delete">
+        <th mat-header-cell *matHeaderCellDef width="500"> Delete </th>
+        <td mat-cell *matCellDef="let element">
+          <a href="javascript:void(0)"  (click)="element.deleteComparison()"><mat-icon color="accent">delete</mat-icon></a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons sticky ="true"></mat-paginator>
+  </div><br>
+</div>
+
+

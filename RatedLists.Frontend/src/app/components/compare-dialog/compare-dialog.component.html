@@ -5,16 +5,16 @@
     <!--First item: <strong>{{data.firstItem}}</strong>-->
   <!--</div><br>-->
   <mat-form-field>
-    <mat-select placeholder="First item" [(value)]="value">
-      <mat-option *ngFor="let item of items" [value]="item">
-        {{item}}
+    <mat-select placeholder="First item" [(value)]="value.name">
+      <mat-option *ngFor="let item of items" [value]="item.name" (click)="item1 = item.id;">
+        {{item.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
     <mat-select placeholder="Second item">
-      <mat-option *ngFor="let item of items" [value]="item">
-        {{item}}
+      <mat-option *ngFor="let item of items" [value]="item.name" (click)="item2 = item.id;">
+        {{item.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>

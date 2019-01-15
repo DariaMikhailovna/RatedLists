@@ -37,11 +37,13 @@ import {MatProgressBarModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material';
 import {MatPaginatorModule} from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material';
-import { DeleteElementDialogComponent } from './components/delete-element-dialog/delete-element-dialog.component';
+import { DeleteItemDialogComponent } from './components/delete-item-dialog/delete-item-dialog.component';
 import { CompareDialogComponent } from './components/compare-dialog/compare-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import {RouterModule, Routes} from '@angular/router';
 import { ListOfComparisonsComponent } from './components/list-of-comparisons/list-of-comparisons.component';
+import {ComparisonsService} from './services/comparisons.service';
+import { DeleteComparisonDialogComponent } from './components/delete-comparison-dialog/delete-comparison-dialog.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/listOfLists', pathMatch: 'full' },
@@ -58,9 +60,10 @@ const routes: Routes = [
     ListOfItemsComponent,
     ItemDialogComponent,
     AuthDialogComponent,
-    DeleteElementDialogComponent,
+    DeleteItemDialogComponent,
     CompareDialogComponent,
-    ListOfComparisonsComponent
+    ListOfComparisonsComponent,
+    DeleteComparisonDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -128,11 +131,13 @@ const routes: Routes = [
   entryComponents: [
     AuthDialogComponent,
     ItemDialogComponent,
-    DeleteElementDialogComponent,
-    CompareDialogComponent
+    DeleteItemDialogComponent,
+    CompareDialogComponent,
+    DeleteComparisonDialogComponent
   ],
   providers: [
     ItemsService,
+    ComparisonsService,
     MatExpansionPanelDescription,
     MatDatepicker,
     FormBuilder,

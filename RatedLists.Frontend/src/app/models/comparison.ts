@@ -1,7 +1,7 @@
-import {Item} from './item';
 
 export class Comparison {
-  item1: Item;
-  item2: Item;
+  id: string;
+  item1: string;
+  item2: string;
   comparisonNum: number;
 }

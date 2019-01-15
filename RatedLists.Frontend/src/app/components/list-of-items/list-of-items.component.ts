@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Item, ITEMS} from '../../models/item';
+import {Item} from '../../models/item';
 import {MatDialog, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {MatPaginator} from '@angular/material//paginator';
 import {ItemDialogComponent} from '../item-dialog/item-dialog.component';
 import {DialogAnyData} from '../../models/dialogAnyData';
-import {DeleteElementDialogComponent} from '../delete-element-dialog/delete-element-dialog.component';
+import {DeleteItemDialogComponent} from '../delete-item-dialog/delete-item-dialog.component';
 import {ItemsService} from '../../services/items.service';
 import {CompareDialogComponent} from '../compare-dialog/compare-dialog.component';
 
@@ -17,7 +17,7 @@ export class ListOfItemsComponent implements OnInit {
   displayedColumns: string[] = ['picture', 'name', 'grade', 'delete'];
   dataSource =  new MatTableDataSource<ItemViewModel>();
   constructor(public dialog: MatDialog,
-              private mainService: ItemsService,
+              private itemService: ItemsService,
               public snackBar: MatSnackBar) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,7 +25,7 @@ export class ListOfItemsComponent implements OnInit {
 
   ngOnInit() {
     this.getItems();
-    DeleteElementDialogComponent.onDeleteItem.subscribe(x => {
+    DeleteItemDialogComponent.onDeleteItem.subscribe(x => {
       this.getItems();
       this.openSnackBar('Item deleted:', x);
     });
@@ -42,12 +42,12 @@ export class ListOfItemsComponent implements OnInit {
   }
 
   addItem(name: string) {
-    const ivm = new ItemViewModel(this.dialog, this.mainService);
+    const ivm = new ItemViewModel(this.dialog, this.itemService);
     ivm.item = new Item();
     ivm.item.name = name;
     ivm.item.listId = this.dataSource.data[0].item.listId; // TODO позже исправить
     this.dataSource.data.push(ivm);
-    this.mainService
+    this.itemService
       .addItem(ivm.item)
       .subscribe(data => {
         this.getItems();
@@ -61,12 +61,13 @@ export class ListOfItemsComponent implements OnInit {
     });
   }
 
-  openCompareDialog(name: string) {
+  openCompareDialog(item: Item) {
     const data = new DialogAnyData();
-    if (name !== '') {
-      data.firstItem = name;
+    if (name !== null) {
+      data.firstItem = item;
     }
-    data.itemNames = this.dataSource.data.map(x => x.item.name);
+    // data.itemNames = this.dataSource.data.map(x => x.item.name);
+    data.items = this.dataSource.data.map(x => x.item);
     const dialogRef = this.dialog.open(CompareDialogComponent, {
       width: '400px',
       data: data
@@ -76,11 +77,11 @@ export class ListOfItemsComponent implements OnInit {
   }
 
   getItems() {
-    this.mainService
+    this.itemService
       .getItems()
       .subscribe(y => {
         this.dataSource =  new MatTableDataSource<ItemViewModel>(y.map(x => {
-          const ivm = new ItemViewModel(this.dialog, this.mainService);
+          const ivm = new ItemViewModel(this.dialog, this.itemService);
           ivm.item = x;
           return ivm;
         }));
@@ -119,7 +120,7 @@ class ItemViewModel {
     const data = new DialogAnyData();
     data.name = this.item.name;
     data.id = this.item.id;
-    const dialogRef = this.dialog.open(DeleteElementDialogComponent, {
+    const dialogRef = this.dialog.open(DeleteItemDialogComponent, {
       width: '400px',
       data: data
     });

@@ -6,24 +6,24 @@ import {ItemsService} from '../../services/items.service';
 import {Subject} from 'rxjs';
 
 @Component({
-  selector: 'app-delete-element-dialog',
-  templateUrl: './delete-element-dialog.component.html',
-  styleUrls: ['./delete-element-dialog.component.css']
+  selector: 'app-delete-item-dialog',
+  templateUrl: './delete-item-dialog.component.html',
+  styleUrls: ['./delete-item-dialog.component.css']
 })
-export class DeleteElementDialogComponent implements OnInit {
+export class DeleteItemDialogComponent implements OnInit {
   static onDeleteItem = new Subject<string>();
 
   constructor( @Inject(MAT_DIALOG_DATA) public data: DialogAnyData,
-               private mainService: ItemsService) { }
+               private itemsService: ItemsService) { }
 
   ngOnInit() {
   }
 
   delete() {
-    this.mainService
+    this.itemsService
       .deleteItem(this.data.id)
       .subscribe(x => {
-        DeleteElementDialogComponent.onDeleteItem.next(this.data.name);
+        DeleteItemDialogComponent.onDeleteItem.next(this.data.name);
       });
   }
 }

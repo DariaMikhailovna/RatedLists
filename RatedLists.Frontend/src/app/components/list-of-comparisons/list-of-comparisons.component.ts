@@ -3,7 +3,6 @@ import {ComparisonsService} from '../../services/comparisons.service';
 import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {Comparison} from '../../models/comparison';
 import {DialogAnyData} from '../../models/dialogAnyData';
-import {DeleteItemDialogComponent} from '../delete-item-dialog/delete-item-dialog.component';
 import {DeleteComparisonDialogComponent} from '../delete-comparison-dialog/delete-comparison-dialog.component';
 
 @Component({

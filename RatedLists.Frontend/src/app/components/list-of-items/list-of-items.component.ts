@@ -19,7 +19,7 @@ export class ListOfItemsComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private itemService: ItemsService,
               public snackBar: MatSnackBar) { }
-
+  names: string[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -41,7 +41,19 @@ export class ListOfItemsComponent implements OnInit {
     });
   }
 
+  getNames(items: Item[]) {
+    this.names = items.map(x => x.name);
+  }
+
   addItem(name: string) {
+    if (name.trim() === '') {
+      this.openSnackBar('Text is empty!', name);
+      return;
+    }
+    if (this.names.findIndex(x => x === name) !== -1) {
+      this.openSnackBar('Item already exists!', name);
+      return;
+    }
     const ivm = new ItemViewModel(this.dialog, this.itemService);
     ivm.item = new Item();
     ivm.item.name = name;
@@ -81,6 +93,7 @@ export class ListOfItemsComponent implements OnInit {
       .getItems()
       .subscribe(y => {
         this.dataSource =  new MatTableDataSource<ItemViewModel>(y.map(x => {
+          this.getNames(y);
           const ivm = new ItemViewModel(this.dialog, this.itemService);
           ivm.item = x;
           return ivm;

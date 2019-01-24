@@ -39,5 +39,11 @@ namespace RatedLists.Backend.Controllers
             Context.DeleteItem(id);
             return Ok();
         }
+
+        [HttpGet("{id}")]
+        public string GetItemName(string id)
+        {
+            return Context.GetItemName(id);
+        }
     }
 }

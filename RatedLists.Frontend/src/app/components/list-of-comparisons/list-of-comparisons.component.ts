@@ -4,6 +4,7 @@ import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from 
 import {Comparison} from '../../models/comparison';
 import {DialogAnyData} from '../../models/dialogAnyData';
 import {DeleteComparisonDialogComponent} from '../delete-comparison-dialog/delete-comparison-dialog.component';
+import {ItemsService} from '../../services/items.service';
 
 @Component({
   selector: 'app-list-of-comparisons',
@@ -15,7 +16,8 @@ export class ListOfComparisonsComponent implements OnInit {
   dataSource =  new MatTableDataSource<ComparisonViewModel>();
   constructor(private comparisonsService: ComparisonsService,
               public snackBar: MatSnackBar,
-              public dialog: MatDialog,) { }
+              public dialog: MatDialog,
+              private itemsServices: ItemsService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -27,13 +29,24 @@ export class ListOfComparisonsComponent implements OnInit {
       this.openSnackBar('Item deleted:', x);
     });
   }
+
   getComparisons() {
       this.comparisonsService
         .getComparisons()
         .subscribe(y => {
           this.dataSource =  new MatTableDataSource<ComparisonViewModel>(y.map(x => {
-            const cvm = new ComparisonViewModel(this.dialog);
+            const cvm = new ComparisonViewModel(this.dialog, this.itemsServices);
             cvm.comparison = x;
+            this.itemsServices
+              .getItemName(x.item1)
+              .subscribe(p => {
+                cvm.name1 = p;
+              });
+            this.itemsServices
+              .getItemName(x.item2)
+              .subscribe(p => {
+                cvm.name2 = p;
+              });
             return cvm;
           }));
           this.dataSource.paginator = this.paginator;
@@ -55,8 +68,12 @@ export class ListOfComparisonsComponent implements OnInit {
 }
  class ComparisonViewModel {
    comparison: Comparison;
+   name1: string;
+   name2: string;
 
-   constructor(private dialog: MatDialog) {}
+   constructor(private dialog: MatDialog,
+               private itemsServices: ItemsService) {
+   }
 
    deleteComparison() {
      const data = new DialogAnyData();

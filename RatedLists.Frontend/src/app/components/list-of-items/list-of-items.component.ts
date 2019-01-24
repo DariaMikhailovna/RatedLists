@@ -50,7 +50,7 @@ export class ListOfItemsComponent implements OnInit {
       this.openSnackBar('Text is empty!', name);
       return;
     }
-    if (this.names.findIndex(x => x === name) !== -1) {
+    if (this.names && this.names.findIndex(x => x === name) !== -1) {
       this.openSnackBar('Item already exists!', name);
       return;
     }

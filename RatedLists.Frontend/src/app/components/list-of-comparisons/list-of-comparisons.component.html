@@ -7,9 +7,9 @@
     <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="First Name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header width="500"> First Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header width="500"> First Name </th>s
         <td mat-cell *matCellDef="let element">
-          <a href="#" class="col-md-4"><strong>{{element.comparison.item1}}</strong></a>
+          <a href="#" class="col-md-4"><strong>{{element.name1}}</strong></a>
         </td>
       </ng-container>
 
@@ -29,7 +29,7 @@
       <ng-container matColumnDef="Second Name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header width="500"> Second Name </th>
         <td mat-cell *matCellDef="let element">
-          <a href="#" class="col-md-4"><strong>{{element.comparison.item2}}</strong></a>
+          <a href="#" class="col-md-4"><strong>{{element.name2}}</strong></a>
         </td>
       </ng-container>
 

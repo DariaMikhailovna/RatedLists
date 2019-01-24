@@ -30,4 +30,9 @@ export class ItemsService {
     const url = `${BackendBaseUrl}/items/`;
     return this.http.put<any>(url, item);
   }
+
+  getItemName(itemId: string): Observable<string> {
+    const url = `${BackendBaseUrl}/items/${itemId}`;
+    return this.http.get<string>(url);
+  }
 }

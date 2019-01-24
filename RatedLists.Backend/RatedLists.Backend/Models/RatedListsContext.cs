@@ -17,7 +17,7 @@ namespace RatedLists.Backend.Models
         public RatedListsContext()
         {
             // строка подключения
-            string connectionString = "mongodb://localhost:27017/RatedLists";
+            string connectionString = "mongodb://localhost:1111/RatedLists";
             var connection = new MongoUrlBuilder(connectionString);
             // получаем клиента для взаимодействия с базой данных
             MongoClient client = new MongoClient(connectionString);
@@ -71,6 +71,12 @@ namespace RatedLists.Backend.Models
         public void DeleteComparison(string id)
         {
             database.GetCollection<Comparison>("Comparisons").DeleteOne(x => x.Id == id);
+        }
+
+        public string GetItemName(string id)
+        {
+            // return database.GetCollection<Item>("Items").Find(x => x.Id == id).FirstOrDefault().Name;
+            return "dfkgjhsdlkjf";
         }
     }
 }

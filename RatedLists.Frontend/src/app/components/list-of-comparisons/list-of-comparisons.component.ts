@@ -39,8 +39,8 @@ export class ListOfComparisonsComponent implements OnInit {
             cvm.comparison = x;
             this.itemsServices
               .getItemName(x.item1)
-              .subscribe(p => {
-                cvm.name1 = p;
+              .subscribe(j => {
+                cvm.name1 = j;
               });
             this.itemsServices
               .getItemName(x.item2)
@@ -70,6 +70,7 @@ export class ListOfComparisonsComponent implements OnInit {
    comparison: Comparison;
    name1: string;
    name2: string;
+   isChangeGrade = false;
 
    constructor(private dialog: MatDialog,
                private itemsServices: ItemsService) {

@@ -3,12 +3,13 @@
   <mat-form-field class="example-full-width">
     <input matInput (keyup)="applyFilter($event.target.value)" width="1500" placeholder="Filter">
   </mat-form-field>
+  <button mat-button routerLink="/ListOfComparisons">Switch to  list of comparisons</button>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
 
-      <ng-container matColumnDef="picture">
+      <ng-container matColumnDef="picture" >
         <th mat-header-cell *matHeaderCellDef width="500"> Picture </th>
-        <td mat-cell *matCellDef="let element"> <img src="{{element.item.picture}}" width="50" height="50">
+        <td mat-cell *matCellDef="let element"> <img src="{{element.item.picture}}" width="50" height="50" matRipple>
           <a href="javascript:void(0)"  (click)="element.isChangePicture = true"><mat-icon color="accent">edit</mat-icon></a>
         </td>
       </ng-container>

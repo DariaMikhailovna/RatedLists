@@ -27,11 +27,11 @@ namespace RatedLists.Backend.Models
             gridFS = new GridFSBucket(database);
         }
 
-        public List<Item> GetAllItems()
+        public List<Item> GetAllItems(string listId)
         {
             return database
                 .GetCollection<Item>("Items")
-                .AsQueryable<Item>()
+                .Find(x => x.ListId == listId)
                 .ToList();
         }
 
@@ -75,8 +75,22 @@ namespace RatedLists.Backend.Models
 
         public string GetItemName(string id)
         {
-            // return database.GetCollection<Item>("Items").Find(x => x.Id == id).FirstOrDefault().Name;
-            return "dfkgjhsdlkjf";
+            return database.GetCollection<Item>("Items").Find(x => x.Id == id).FirstOrDefault().Name;
+        }
+
+        public void AddList(string name)
+        {
+            var list = new ListOfItems();
+            list.Name = name;
+            database.GetCollection<ListOfItems>("Lists").InsertOne(list);
+        }
+
+        public List<ListOfItems> GetAllLists()
+        {
+            return database
+                .GetCollection<ListOfItems>("Lists")
+                .AsQueryable<ListOfItems>()
+                .ToList();
         }
     }
 }

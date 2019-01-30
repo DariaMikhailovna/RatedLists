@@ -28,7 +28,7 @@ import {
   MatDatepickerModule,
   MatExpansionModule,
   MatCheckboxModule,
-  MatButtonToggleModule, MatSliderModule
+  MatButtonToggleModule, MatSliderModule, MatRippleModule
 } from '@angular/material';
 import {AuthDialogComponent} from './components/auth-dialog/auth-dialog.component';
 import {FormBuilder, FormsModule} from '@angular/forms';
@@ -44,10 +44,12 @@ import {RouterModule, Routes} from '@angular/router';
 import { ListOfComparisonsComponent } from './components/list-of-comparisons/list-of-comparisons.component';
 import {ComparisonsService} from './services/comparisons.service';
 import { DeleteComparisonDialogComponent } from './components/delete-comparison-dialog/delete-comparison-dialog.component';
+import { AddListDialogComponent } from './components/add-list-dialog/add-list-dialog.component';
+import {ListsServiceService} from './services/lists-service.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/listOfLists', pathMatch: 'full' },
-  { path: 'listOfItems', component: ListOfItemsComponent },
+  { path: 'listOfItems/:listId', component: ListOfItemsComponent },
   { path: 'ListOfComparisons', component: ListOfComparisonsComponent },
   { path: 'listOfLists', component: ListOfListsComponent }
 ];
@@ -63,7 +65,8 @@ const routes: Routes = [
     DeleteItemDialogComponent,
     CompareDialogComponent,
     ListOfComparisonsComponent,
-    DeleteComparisonDialogComponent
+    DeleteComparisonDialogComponent,
+    AddListDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,8 @@ const routes: Routes = [
     MatSortModule,
     MatSlideToggleModule,
     MatSliderModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatRippleModule
   ],
   exports: [
     MatExpansionModule,
@@ -126,14 +130,16 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatSlideToggleModule,
-    MatSliderModule
+    MatSliderModule,
+    MatRippleModule
   ],
   entryComponents: [
     AuthDialogComponent,
     ItemDialogComponent,
     DeleteItemDialogComponent,
     CompareDialogComponent,
-    DeleteComparisonDialogComponent
+    DeleteComparisonDialogComponent,
+    AddListDialogComponent
   ],
   providers: [
     ItemsService,
@@ -141,7 +147,8 @@ const routes: Routes = [
     MatExpansionPanelDescription,
     MatDatepicker,
     FormBuilder,
-    MatIconRegistry
+    MatIconRegistry,
+    ListsServiceService
   ],
   bootstrap: [AppComponent]
 })

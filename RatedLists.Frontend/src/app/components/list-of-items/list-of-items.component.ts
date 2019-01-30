@@ -7,6 +7,7 @@ import {DialogAnyData} from '../../models/dialogAnyData';
 import {DeleteItemDialogComponent} from '../delete-item-dialog/delete-item-dialog.component';
 import {ItemsService} from '../../services/items.service';
 import {CompareDialogComponent} from '../compare-dialog/compare-dialog.component';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-list-of-items',
@@ -16,7 +17,8 @@ import {CompareDialogComponent} from '../compare-dialog/compare-dialog.component
 export class ListOfItemsComponent implements OnInit {
   displayedColumns: string[] = ['picture', 'name', 'grade', 'delete'];
   dataSource =  new MatTableDataSource<ItemViewModel>();
-  constructor(public dialog: MatDialog,
+  constructor(private route: ActivatedRoute,
+              public dialog: MatDialog,
               private itemService: ItemsService,
               public snackBar: MatSnackBar) { }
   names: string[];
@@ -46,6 +48,7 @@ export class ListOfItemsComponent implements OnInit {
   }
 
   addItem(name: string) {
+    const listId = this.route.snapshot.paramMap.get('listId');
     if (name.trim() === '') {
       this.openSnackBar('Text is empty!', name);
       return;
@@ -57,7 +60,7 @@ export class ListOfItemsComponent implements OnInit {
     const ivm = new ItemViewModel(this.dialog, this.itemService);
     ivm.item = new Item();
     ivm.item.name = name;
-    ivm.item.listId = this.dataSource.data[0].item.listId; // TODO позже исправить
+    ivm.item.listId = listId.toString();
     this.dataSource.data.push(ivm);
     this.itemService
       .addItem(ivm.item)
@@ -89,8 +92,9 @@ export class ListOfItemsComponent implements OnInit {
   }
 
   getItems() {
+    const listId = this.route.snapshot.paramMap.get('listId');
     this.itemService
-      .getItems()
+      .getItems(listId.toString())
       .subscribe(y => {
         this.dataSource =  new MatTableDataSource<ItemViewModel>(y.map(x => {
           this.getNames(y);

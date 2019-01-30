@@ -11,8 +11,8 @@ export class ItemsService {
 
   constructor(private http: HttpClient) { }
 
-  getItems(): Observable<Item[]> {
-    const url = `${BackendBaseUrl}/items`;
+  getItems(listId: string): Observable<Item[]> {
+    const url = `${BackendBaseUrl}/items/${listId}`;
     return this.http.get<Item[]>(url);
   }
 
@@ -31,8 +31,8 @@ export class ItemsService {
     return this.http.put<any>(url, item);
   }
 
-  getItemName(itemId: string): Observable<string> {
-    const url = `${BackendBaseUrl}/items/${itemId}`;
+  getItemName(id: string): Observable<string> {
+    const url = `${BackendBaseUrl}/items/GetItemName/${id}`;
     return this.http.get<string>(url);
   }
 }

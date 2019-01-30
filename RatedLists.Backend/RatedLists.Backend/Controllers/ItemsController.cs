@@ -13,10 +13,10 @@ namespace RatedLists.Backend.Controllers
     {
         public readonly RatedListsContext Context = new RatedListsContext();
 
-        [HttpGet] 
-        public List<Item> Get()
+        [HttpGet("{listId}")]
+        public List<Item> Get(string listId)
         {
-            return Context.GetAllItems();
+            return Context.GetAllItems(listId);
         }
 
         [HttpPost]
@@ -40,10 +40,11 @@ namespace RatedLists.Backend.Controllers
             return Ok();
         }
 
-        [HttpGet("{id}")]
-        public string GetItemName(string id)
+        [HttpGet("GetItemName/{id}")]
+        public JsonResult GetItemName(string id)
         {
-            return Context.GetItemName(id);
+            var name = Context.GetItemName(id);
+            return new JsonResult(value: name);
         }
     }
 }

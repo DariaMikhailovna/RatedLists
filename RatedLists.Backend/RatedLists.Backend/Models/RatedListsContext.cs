@@ -92,5 +92,13 @@ namespace RatedLists.Backend.Models
                 .AsQueryable<ListOfItems>()
                 .ToList();
         }
+
+        public List<Person> GetAllPersons()
+        {
+            return database
+                .GetCollection<Person>("Persons")
+                .AsQueryable<Person>()
+                .ToList();
+        }
     }
 }

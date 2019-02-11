@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RatedLists.Backend.Models
 {
-    public class User
+    public class Person
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
@@ -13,7 +13,9 @@ namespace RatedLists.Backend.Models
         public string Login { get; set; }
 
         public string Password { get; set; }
-         
-        public List<ListOfItems> Lists { get; set; }
+
+        public string Role { get; set; }
+
+        public List<string> ListIds { get; set; } 
     }
 }

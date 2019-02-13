@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>Dasyaka</Authors>
+    <Company>Vasyaka ko</Company>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,9 +1,5 @@
 <div class="container-fluid">
   <br>
-  <div class="container-fluid">
-    <button mat-fab color="primary" (click)="addList()"><mat-icon>add</mat-icon></button>
-    <button mat-button routerLink="/listOfItems">Go listOfItems</button>
-  </div>
   <mat-form-field class="example-full-width">
     <input matInput (keyup)="applyFilter($event.target.value)" width="1500" placeholder="Filter">
   </mat-form-field>
@@ -42,5 +38,8 @@
     </table>
     <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons sticky ="true"></mat-paginator>
   </div><br>
+  <div class="container-fluid">
+    <button mat-fab color="primary" (click)="addList()"><mat-icon>add</mat-icon></button>
+  </div>
 </div>
 

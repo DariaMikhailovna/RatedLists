@@ -17,7 +17,7 @@ namespace RatedLists.Backend.Models
         public RatedListsContext()
         {
             // строка подключения
-            string connectionString = "mongodb://localhost:1111/RatedLists";
+            string connectionString = "mongodb://localhost:27017/RatedLists";
             var connection = new MongoUrlBuilder(connectionString);
             // получаем клиента для взаимодействия с базой данных
             MongoClient client = new MongoClient(connectionString);
@@ -90,6 +90,14 @@ namespace RatedLists.Backend.Models
             return database
                 .GetCollection<ListOfItems>("Lists")
                 .AsQueryable<ListOfItems>()
+                .ToList();
+        }
+
+        public List<Person> GetAllPersons()
+        {
+            return database
+                .GetCollection<Person>("Persons")
+                .AsQueryable<Person>()
                 .ToList();
         }
     }

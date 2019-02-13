@@ -131,7 +131,7 @@ class ItemViewModel {
   isChangePicture = false;
 
   constructor(public dialog: MatDialog,
-              private mainService: ItemsService) { }
+              private itemsService: ItemsService) { }
 
   deleteItem() {
     const data = new DialogAnyData();
@@ -146,7 +146,7 @@ class ItemViewModel {
   }
 
   changeName() {
-    this.mainService
+    this.itemsService
       .updateItem(this.item)
       .subscribe(x => {
         this.isChangeName = false;

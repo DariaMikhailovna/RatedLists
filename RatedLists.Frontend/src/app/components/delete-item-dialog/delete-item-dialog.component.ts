@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material';
 import {DialogAnyData} from '../../models/dialogAnyData';
-import {MatSnackBar} from '@angular/material';
 import {ItemsService} from '../../services/items.service';
 import {Subject} from 'rxjs';
 

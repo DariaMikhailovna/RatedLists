@@ -58,6 +58,16 @@ namespace RatedLists.Backend.Models
             database.GetCollection<Item>("Items").FindOneAndReplace(x => x.Id == item.Id, item);
         }
 
+        public void DeleteList(string id)
+        {
+            database.GetCollection<ListOfItems>("Lists").DeleteOne(x => x.Id == id);
+        }
+
+        public void UpdateList(ListOfItems list)
+        {
+            database.GetCollection<ListOfItems>("Lists").FindOneAndReplace(x => x.Id == list.Id, list);
+        }
+
         public void AddComparison(Comparison сomparison)
         {
             database.GetCollection<Comparison>("Comparisons").InsertOne(сomparison);

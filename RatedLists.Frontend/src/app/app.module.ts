@@ -45,7 +45,8 @@ import { ListOfComparisonsComponent } from './components/list-of-comparisons/lis
 import {ComparisonsService} from './services/comparisons.service';
 import { DeleteComparisonDialogComponent } from './components/delete-comparison-dialog/delete-comparison-dialog.component';
 import { AddListDialogComponent } from './components/add-list-dialog/add-list-dialog.component';
-import {ListsServiceService} from './services/lists-service.service';
+import {ListsService} from './services/lists.service';
+import { DeleteListDialogComponent } from './components/delete-list-dialog/delete-list-dialog.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/listOfLists', pathMatch: 'full' },
@@ -66,7 +67,8 @@ const routes: Routes = [
     CompareDialogComponent,
     ListOfComparisonsComponent,
     DeleteComparisonDialogComponent,
-    AddListDialogComponent
+    AddListDialogComponent,
+    DeleteListDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -139,7 +141,8 @@ const routes: Routes = [
     DeleteItemDialogComponent,
     CompareDialogComponent,
     DeleteComparisonDialogComponent,
-    AddListDialogComponent
+    AddListDialogComponent,
+    DeleteListDialogComponent
   ],
   providers: [
     ItemsService,
@@ -148,7 +151,7 @@ const routes: Routes = [
     MatDatepicker,
     FormBuilder,
     MatIconRegistry,
-    ListsServiceService
+    ListsService
   ],
   bootstrap: [AppComponent]
 })

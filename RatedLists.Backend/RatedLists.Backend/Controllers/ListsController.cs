@@ -25,5 +25,20 @@ namespace RatedLists.Backend.Controllers
         {
             Context.AddList(name);
         }
+
+
+        [HttpPut]
+        public IActionResult Put([FromBody] ListOfItems list)
+        {
+            Context.UpdateList(list);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteList(string id)
+        {
+            Context.DeleteList(id);
+            return Ok();
+        }
     }
 }

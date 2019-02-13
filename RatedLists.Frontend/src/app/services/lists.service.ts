@@ -8,7 +8,7 @@ import {ListOfItems} from '../models/listOfItems';
 @Injectable({
   providedIn: 'root'
 })
-export class ListsServiceService {
+export class ListsService {
 
   constructor(private http: HttpClient) { }
 
@@ -20,5 +20,15 @@ export class ListsServiceService {
   getLists(): Observable<ListOfItems[]> {
     const url = `${BackendBaseUrl}/lists`;
     return this.http.get<ListOfItems[]>(url);
+  }
+
+  updateItem(list: ListOfItems): Observable<any> {
+    const url = `${BackendBaseUrl}/lists/`;
+    return this.http.put<any>(url, list);
+  }
+
+  deleteList(listId: string): Observable<any> {
+    const url = `${BackendBaseUrl}/lists/${listId}`;
+    return this.http.delete<any>(url);
   }
 }

@@ -1,9 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {AddListDialogComponent} from '../add-list-dialog/add-list-dialog.component';
-import {ListsServiceService} from '../../services/lists-service.service';
+import {ListsService} from '../../services/lists.service';
 import {ListOfItems} from '../../models/listOfItems';
 import {ItemsService} from '../../services/items.service';
+import {DeleteItemDialogComponent} from '../delete-item-dialog/delete-item-dialog.component';
+import {DialogAnyData} from '../../models/dialogAnyData';
+import {DeleteListDialogComponent} from '../delete-list-dialog/delete-list-dialog.component';
 
 @Component({
   selector: 'app-list-of-lists',
@@ -15,9 +18,10 @@ export class ListOfListsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'delete'];
   dataSource =  new MatTableDataSource<ListViewModel>();
   constructor(public dialog: MatDialog,
-              private listsServiceService: ListsServiceService,
+              private listsService: ListsService,
               private  itemsService: ItemsService,
-              public snackBar: MatSnackBar) { }
+              public snackBar: MatSnackBar,
+              private listService: ListsService) { }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getLists();
@@ -25,14 +29,18 @@ export class ListOfListsComponent implements OnInit {
       this.getLists();
       this.openSnackBar('List added:', x);
     });
+    DeleteListDialogComponent.onDeleteList.subscribe(x => {
+      this.getLists();
+      this.openSnackBar('List deleted:', x);
+    });
   }
 
   getLists() {
-    this.listsServiceService
+    this.listsService
         .getLists()
         .subscribe(y => {
           this.dataSource =  new MatTableDataSource<ListViewModel>(y.map(x => {
-            const lvm = new ListViewModel(this.dialog, this.itemsService);
+            const lvm = new ListViewModel(this.dialog, this.itemsService, this.listService);
             lvm.list = x;
             return lvm;
           }));
@@ -65,11 +73,28 @@ class ListViewModel {
   list: ListOfItems;
   isChangeName = false;
   constructor(public dialog: MatDialog,
-              private  itemsService: ItemsService) {
+              private  itemsService: ItemsService,
+              private listService: ListsService) {
 
   }
 
   deleteList() {
+    const data = new DialogAnyData();
+    data.name = this.list.name;
+    data.id = this.list.id;
+    const dialogRef = this.dialog.open(DeleteListDialogComponent, {
+      width: '400px',
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 
+  changeName() {
+    this.listService
+      .updateItem(this.list)
+      .subscribe(x => {
+        this.isChangeName = false;
+      });
   }
 }

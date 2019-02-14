@@ -1,7 +1,9 @@
 import {ListOfItems} from './listOfItems';
 
-export class User {
+export class Person {
+  id: string;
   login: string;
   password: string;
-  lists: ListOfItems[] = [];
+  role: string;
+  listIds: string[] = [];
 }

@@ -5,7 +5,7 @@
     <input matInput [(ngModel)]='name' placeholder="Enter name">
   </mat-form-field>
   <mat-form-field class="example-full-width" *ngIf="data.isBulkAdd">
-    <textarea matInput placeholder="Enter names"></textarea>
+    <textarea matInput [(ngModel)]='name' placeholder="Enter names"></textarea>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

@@ -10,20 +10,16 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./item-dialog.component.css']
 })
 export class ItemDialogComponent implements OnInit {
-  static onAddItem = new Subject<string>();
+  static onAddItem = new Subject<DialogAnyData>();
   name = '';
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogAnyData, public snackBar: MatSnackBar) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogAnyData) { }
 
   ngOnInit() {
   }
   add() {
-    ItemDialogComponent.onAddItem.next(this.name);
-    this.openSnackBar('Item add:', this.name);
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
+    const data = new DialogAnyData();
+    data.name = this.name;
+    data.isBulkAdd = this.data.isBulkAdd;
+    ItemDialogComponent.onAddItem.next(data);
   }
 }

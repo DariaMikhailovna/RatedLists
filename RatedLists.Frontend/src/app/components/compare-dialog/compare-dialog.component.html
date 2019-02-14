@@ -1,0 +1,30 @@
+<h1 mat-dialog-title *ngIf="data.firstItem">Compare this item with another item?</h1>
+<h1 mat-dialog-title *ngIf="!data.firstItem">Compare two items?</h1>
+<div mat-dialog-content>
+  <!--<div *ngIf="data.firstItem">-->
+    <!--First item: <strong>{{data.firstItem}}</strong>-->
+  <!--</div><br>-->
+  <mat-form-field>
+    <mat-select placeholder="First item" [(value)]="value.name">
+      <mat-option *ngFor="let item of items" [value]="item.name" (click)="item1 = item.id;">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Second item">
+      <mat-option *ngFor="let item of items" [value]="item.name" (click)="item2 = item.id;">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div>
+    <mat-slider width="500">
+      
+    </mat-slider>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="compare()">Go</button>
+</div>

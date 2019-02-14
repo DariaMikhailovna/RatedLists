@@ -7,7 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ListOfListsComponent } from './components/list-of-lists/list-of-lists.component';
 import { ListOfItemsComponent } from './components/list-of-items/list-of-items.component';
 import { ItemDialogComponent } from './components/item-dialog/item-dialog.component';
-import {MainService} from './services/main.service';
+import {ItemsService} from './services/items.service';
 import {
   MatButtonModule,
   MatDialogModule,
@@ -28,7 +28,7 @@ import {
   MatDatepickerModule,
   MatExpansionModule,
   MatCheckboxModule,
-  MatButtonToggleModule
+  MatButtonToggleModule, MatSliderModule, MatRippleModule
 } from '@angular/material';
 import {AuthDialogComponent} from './components/auth-dialog/auth-dialog.component';
 import {FormBuilder, FormsModule} from '@angular/forms';
@@ -37,7 +37,25 @@ import {MatProgressBarModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material';
 import {MatPaginatorModule} from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material';
-import { DeleteElementDialogComponent } from './components/delete-element-dialog/delete-element-dialog.component';
+import { DeleteItemDialogComponent } from './components/delete-item-dialog/delete-item-dialog.component';
+import { CompareDialogComponent } from './components/compare-dialog/compare-dialog.component';
+import { AppRoutingModule } from './app-routing.module';
+import {RouterModule, Routes} from '@angular/router';
+import { ListOfComparisonsComponent } from './components/list-of-comparisons/list-of-comparisons.component';
+import {ComparisonsService} from './services/comparisons.service';
+import { DeleteComparisonDialogComponent } from './components/delete-comparison-dialog/delete-comparison-dialog.component';
+import { AddListDialogComponent } from './components/add-list-dialog/add-list-dialog.component';
+import {ListsService} from './services/lists.service';
+import { DeleteListDialogComponent } from './components/delete-list-dialog/delete-list-dialog.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/listOfLists', pathMatch: 'full' },
+  { path: 'listOfItems/:listId', component: ListOfItemsComponent },
+  { path: 'ListOfComparisons', component: ListOfComparisonsComponent },
+  { path: 'listOfLists', component: ListOfListsComponent },
+  { path: '**', component: NotFoundComponent },
+];
 
 @NgModule({
   declarations: [
@@ -47,12 +65,19 @@ import { DeleteElementDialogComponent } from './components/delete-element-dialog
     ListOfItemsComponent,
     ItemDialogComponent,
     AuthDialogComponent,
-    DeleteElementDialogComponent
+    DeleteItemDialogComponent,
+    CompareDialogComponent,
+    ListOfComparisonsComponent,
+    DeleteComparisonDialogComponent,
+    AddListDialogComponent,
+    DeleteListDialogComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
     MatExpansionModule,
     MatToolbarModule,
     MatDatepickerModule,
@@ -78,7 +103,10 @@ import { DeleteElementDialogComponent } from './components/delete-element-dialog
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSliderModule,
+    AppRoutingModule,
+    MatRippleModule
   ],
   exports: [
     MatExpansionModule,
@@ -106,19 +134,27 @@ import { DeleteElementDialogComponent } from './components/delete-element-dialog
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatRippleModule
   ],
   entryComponents: [
     AuthDialogComponent,
     ItemDialogComponent,
-    DeleteElementDialogComponent
+    DeleteItemDialogComponent,
+    CompareDialogComponent,
+    DeleteComparisonDialogComponent,
+    AddListDialogComponent,
+    DeleteListDialogComponent
   ],
   providers: [
-    MainService,
+    ItemsService,
+    ComparisonsService,
     MatExpansionPanelDescription,
     MatDatepicker,
     FormBuilder,
-    MatIconRegistry
+    MatIconRegistry,
+    ListsService
   ],
   bootstrap: [AppComponent]
 })

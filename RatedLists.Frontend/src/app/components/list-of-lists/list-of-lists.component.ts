@@ -4,7 +4,6 @@ import {AddListDialogComponent} from '../add-list-dialog/add-list-dialog.compone
 import {ListsService} from '../../services/lists.service';
 import {ListOfItems} from '../../models/listOfItems';
 import {ItemsService} from '../../services/items.service';
-import {DeleteItemDialogComponent} from '../delete-item-dialog/delete-item-dialog.component';
 import {DialogAnyData} from '../../models/dialogAnyData';
 import {DeleteListDialogComponent} from '../delete-list-dialog/delete-list-dialog.component';
 

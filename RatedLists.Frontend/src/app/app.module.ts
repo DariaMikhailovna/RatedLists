@@ -47,12 +47,14 @@ import { DeleteComparisonDialogComponent } from './components/delete-comparison-
 import { AddListDialogComponent } from './components/add-list-dialog/add-list-dialog.component';
 import {ListsService} from './services/lists.service';
 import { DeleteListDialogComponent } from './components/delete-list-dialog/delete-list-dialog.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/listOfLists', pathMatch: 'full' },
   { path: 'listOfItems/:listId', component: ListOfItemsComponent },
   { path: 'ListOfComparisons', component: ListOfComparisonsComponent },
-  { path: 'listOfLists', component: ListOfListsComponent }
+  { path: 'listOfLists', component: ListOfListsComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
@@ -68,7 +70,8 @@ const routes: Routes = [
     ListOfComparisonsComponent,
     DeleteComparisonDialogComponent,
     AddListDialogComponent,
-    DeleteListDialogComponent
+    DeleteListDialogComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
